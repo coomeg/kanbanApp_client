@@ -46,8 +46,9 @@
       >
         {{ error }}
       </p>
-      <router-link to="/create">
-        <h3>新規登録</h3>
+      <router-link
+        to="/create">
+        <h3 id="create-link">新規登録</h3>
       </router-link>
     </div>
   </form>
@@ -185,5 +186,8 @@ ul li {
 }
 .form-actions p {
   font-size: 0.5em;
+}
+.create-link {
+  color: blue;
 }
 </style>

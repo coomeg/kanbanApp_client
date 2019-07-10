@@ -42,6 +42,7 @@
     </div>
     <div class="form-actions">
       <KbnButton
+        :disabled="disableCreateAction"
         @click="handleClick"
       >
         新規登録
@@ -122,7 +123,7 @@ export default {
       return valid
     },
 
-    disableLoginAction () { // validを使ってログイン処理の可否、progressは後述
+    disableCreateAction () { // validを使って登録処理の可否、progressは後述
       return !this.valid || this.progress
     }
   },
@@ -133,7 +134,7 @@ export default {
     },
 
     handleClick (ev) {
-      this.progress = true // ログイン処理実行中をあらわす
+      this.progress = true // 登録処理実行中をあらわす
       this.error = ''
 
       this.$nextTick(() => {

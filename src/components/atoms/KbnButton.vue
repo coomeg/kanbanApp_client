@@ -1,12 +1,12 @@
 <template>
-  <button
+  <el-button
     :class="classes"
     :disabled="disabled"
     type="button"
     @click="handleClick"
   >
     <slot />
-  </button>
+  </el-button>
 </template>
 
 <script>
