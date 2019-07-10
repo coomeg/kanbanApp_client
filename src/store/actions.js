@@ -4,6 +4,15 @@ import { Auth, List, Task, Users } from '../api'
 export default {
   login: ({ commit }, authInfo) => {
     return Auth.login(authInfo)
+      .then(({ token, userId, name }) => {
+        localStorage.setItem('token', token)
+        commit(types.AUTH_LOGIN, { token, userId, name })
+      })
+      .catch(err => { throw err })
+  },
+
+  createUser: ({ commit }, userInfo) => {
+    return Users.create(userInfo)
       .then(({ token, userId }) => {
         localStorage.setItem('token', token)
         commit(types.AUTH_LOGIN, { token, userId })
@@ -11,8 +20,8 @@ export default {
       .catch(err => { throw err })
   },
 
-  createUser: ({ commit }, userInfo) => {
-    return Users.create(userInfo)
+  editUser: ({ commit }, userInfo) => {
+    return Users.update(userInfo)
       .then(({ token, userId }) => {
         localStorage.setItem('token', token)
         commit(types.AUTH_LOGIN, { token, userId })

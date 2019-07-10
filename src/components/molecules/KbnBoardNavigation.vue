@@ -1,60 +1,93 @@
 <template>
-  <nav class="board-navigation">
-    <div class="title">
-      <h1>Kanban App</h1>
-    </div>
-    <el-menu
-      :default-active="activeIndex2"
-      class="el-menu-demo"
-      mode="horizontal"
-      @select="handleSelect"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b">
-      <el-submenu index="1">
-        <template slot="title">メニュー</template>
-        <el-menu-item index="1-1">item one</el-menu-item>
-        <el-menu-item index="1-2">item two</el-menu-item>
-        <el-submenu index="2-3">
-          <template slot="title">item four</template>
-          <el-menu-item index="2-4-1">item one</el-menu-item>
-          <el-menu-item index="2-4-2">item two</el-menu-item>
-          <el-menu-item index="2-4-3">item three</el-menu-item>
-        </el-submenu>
-        <el-menu-item
-          index="1-4"
-          @click="$emit('logout')">
-          ログオフ
-        </el-menu-item>
-      </el-submenu>
-    </el-menu>
-  </nav>
+  <div class="board-view">
+    <nav class="board-navigation">
+      <div class="title">
+        <h1>{{this.pageName}}</h1>
+        ログインユーザー：{{userName}}
+      </div>
+      <KbnBoardMenu
+        @logout="handleLogout"
+        @edituser="handleEditUser"
+        @top="handleTop">
+      </KbnBoardMenu>
+    </nav>
+  </div>
 </template>
 
 <script>
-import KbnButton from '@/components/atoms/KbnButton.vue'
+import { mapState } from 'vuex'
+import KbnBoardMenu from '@/components/molecules/KbnBoardMenu.vue'
 
 export default {
   name: 'KbnBoardNavigation',
 
-  data: {
-    activeIndex: '1',
-    activeIndex2: '1'
+  data () {
+    return {
+      pageName: 'Kanban App',
+      progress: false,
+      message: ''
+    }
   },
 
   components: {
-    KbnButton
+    KbnBoardMenu
   },
 
+  props: {
+    pageName: {
+      type: String,
+      required: true
+    }
+  },
+
+  computed: mapState({
+    userName: state => state.auth.name
+  }),
+
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath)
+    // selectMenu (key, keyPath) {
+    //   console.log('key:', key, 'pass:', keyPath)
+    //   this.pageName = key === 'トップ' ? 'Kanban App' : key
+    // },
+
+    setProgress (message) {
+      this.progress = true
+      this.message = message
+    },
+
+    resetProgress () {
+      this.progress = false
+      this.message = ''
+    },
+
+    handleTop () {
+      this.$router.push({ path: '/' })
+    },
+
+    handleEditUser () {
+      this.$router.push({ path: '/editUser' })
+    },
+
+    handleLogout () {
+      this.setProgress('ログオフ中...')
+
+      return this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push({ path: '/login' })
+        })
+        .catch(err => Promise.reject(err))
+        .then(() => {
+          this.resetProgress()
+        })
     }
   }
 }
 </script>
 
 <style scoped>
+.board-view {
+  border: medium solid black;
+}
 .board-navigation {
   display: flex;
   border-bottom: medium solid black;

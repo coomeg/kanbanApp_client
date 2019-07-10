@@ -1,6 +1,7 @@
 <template>
   <div class="board-view">
-    <KbnBoardNavigation @logout="handleLogout" />
+    <KbnBoardNavigation
+      pageName="Kanban APP" />
     <p
       v-if="progress"
       class="progress"
@@ -61,19 +62,6 @@ export default {
           this.resetProgress()
         })
     },
-
-    handleLogout () {
-      this.setProgress('ログオフ中...')
-
-      return this.$store.dispatch('logout')
-        .then(() => {
-          this.$router.push({ path: '/login' })
-        })
-        .catch(err => Promise.reject(err))
-        .then(() => {
-          this.resetProgress()
-        })
-    }
   }
 }
 </script>

@@ -47,7 +47,7 @@
         {{ error }}
       </p>
       <router-link
-        to="/create">
+        to="/createUser">
         <h3 id="create-link">新規登録</h3>
       </router-link>
     </div>

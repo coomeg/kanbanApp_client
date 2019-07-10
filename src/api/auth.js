@@ -8,7 +8,7 @@ export default {
       client.post('http://localhost:8080/api/login', authInfo)
         .then(res => {
           console.log(res)
-          resolve({ token: res.data.token, userId: res.data.userId })
+          resolve({ token: res.data.token, userId: res.data.userId, name: res.data.name })
         })
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))

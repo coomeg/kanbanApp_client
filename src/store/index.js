@@ -10,7 +10,8 @@ Vue.use(Vuex)
 const state = {
   auth: { // 状態`Auth`
     token: localStorage.getItem('token'), // `token`は locale storage から取得する
-    userId: null // `userId`はnullで初期化
+    userId: null, // `userId`はnullで初期化
+    name: null
   },
   board: { // 状態`Board`
     lists: [] // 状態`TaskList`は空で初期化

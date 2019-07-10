@@ -45,13 +45,13 @@
         :disabled="disableCreateAction"
         @click="handleClick"
       >
-        新規登録
+        <slot name="actionName">新規登録</slot>
       </KbnButton>
       <p
         v-if="progress"
         class="login-progress"
       >
-        登録中...
+        <slot name="actionProgress">登録中...</slot>
       </p>
       <p
         v-if="error"
@@ -71,14 +71,14 @@ const REGEX_EMAIL = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))
 const required = val => !!val.trim()
 
 export default {
-  name: 'KbnCreateForm',
+  name: 'KbnEditUserForm',
 
   components: {
     KbnButton
   },
 
   props: {
-    oncreate: {
+    onaction: {
       type: Function,
       required: true
     }
@@ -95,6 +95,8 @@ export default {
   },
 
   computed: {
+
+
     validation () { // nameとemailとpasswordのバリデーション
       return {
         name: {
@@ -138,7 +140,7 @@ export default {
       this.error = ''
 
       this.$nextTick(() => {
-        this.oncreate({ name: this.name, email: this.email, password: this.password })
+        this.onaction({ userId: this.$store.state.auth.userId, name: this.name, email: this.email, password: this.password })
           .catch(err => {
             this.error = err.message
           })

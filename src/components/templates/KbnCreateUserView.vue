@@ -1,18 +1,18 @@
 <template>
   <div class="login-view">
     <h1>Kanban 新規登録</h1>
-    <KbnCreateForm :oncreate="handleCreate"/>
+    <KbnEditUserForm :onaction="handleCreate"/>
   </div>
 </template>
 
 <script>
-import KbnCreateForm from '@/components/molecules/KbnCreateForm.vue'
+import KbnEditUserForm from '@/components/molecules/KbnEditUserForm.vue'
 
 export default {
-  name: 'KbnCreateView',
+  name: 'KbnCreateUserView',
 
   components: {
-    KbnCreateForm
+    KbnEditUserForm
   },
 
   methods: {

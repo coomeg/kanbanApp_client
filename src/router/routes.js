@@ -1,11 +1,8 @@
 import KbnBoardView from '@/components/templates/KbnBoardView.vue'
 import KbnLoginView from '@/components/templates/KbnLoginView.vue'
 import KbnTaskDetailModal from '@/components/templates/KbnTaskDetailModal.vue'
-// import KbnCreateView from '@/components/templates/KbnCreateView.vue'
-
-const KbnCreateView = function () {
-  return import('@/components/templates/KbnCreateView.vue')
-}
+import KbnCreateUserView from '@/components/templates/KbnCreateUserView.vue'
+import KbnEditUserView from '@/components/templates/KbnEditUserView.vue'
 
 export default [{
   path: '/',
@@ -21,8 +18,11 @@ export default [{
   path: '/login',
   component: KbnLoginView
 }, {
-  path: '/create',
-  component: KbnCreateView
+  path: '/createUser',
+  component: KbnCreateUserView
+}, {
+  path: '/editUser',
+  component: KbnEditUserView
 }, {
   path: '*',
   redirect: '/'

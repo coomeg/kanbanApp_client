@@ -28,7 +28,7 @@ export default {
 
     handlecreate () {
       console.log('handlecreate')
-      this.$router.push({path: '/create'})
+      this.$router.push({path: '/createUser'})
     },
     throwReject (err) { return Promise.reject(err) }
   }
