@@ -95,8 +95,6 @@ export default {
   },
 
   computed: {
-
-
     validation () { // nameとemailとpasswordのバリデーション
       return {
         name: {
@@ -163,7 +161,6 @@ label {
   display: block;
 }
 input {
-  width: 100%;
   padding: .5em;
   font: inherit;
 }

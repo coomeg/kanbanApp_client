@@ -1,7 +1,5 @@
 <template>
   <div class="board-view">
-    <KbnBoardNavigation
-      pageName="Kanban APP" />
     <p
       v-if="progress"
       class="progress"
@@ -10,7 +8,6 @@
     </p>
     <KbnBoardTask :lists="lists" />
     <!-- タスク詳細モーダル表示用プレースホルダ -->
-    <router-view />
   </div>
 </template>
 

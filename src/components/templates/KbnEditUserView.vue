@@ -1,6 +1,6 @@
 <template>
-  <div class="board-view">
-    <KbnBoardNavigation pageName="ユーザー情報編集" />
+  <div class="editUser">
+    <span>ユーザー情報編集</span>
     <KbnEditUserForm :onaction="handleEdit">
       <template slot="actionName">編集</template>
       <template slot="actionProgress">
@@ -11,15 +11,19 @@
 </template>
 
 <script>
-import KbnBoardNavigation from '@/components/molecules/KbnBoardNavigation.vue'
 import KbnEditUserForm from '@/components/molecules/KbnEditUserForm.vue'
 
 export default {
   name: 'KbnCreateView',
+  props: {
+    handleClose: {
+      type: Function,
+      required: true
+    }
+  },
 
   components: {
-    KbnEditUserForm,
-    KbnBoardNavigation
+    KbnEditUserForm
   },
 
   methods: {
@@ -35,12 +39,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.board-view {
-  border: medium solid black;
-}
-.progress {
-  margin: auto;
-}
-</style>
