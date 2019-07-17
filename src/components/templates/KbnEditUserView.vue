@@ -29,7 +29,7 @@ export default {
   methods: {
     handleEdit (authInfo) {
       return this.$store.dispatch('editUser', authInfo)
-        .then(() => {
+        .then((res) => {
           // this.$router.push({ path: '/login' })
         })
         .catch(err => this.throwReject(err))

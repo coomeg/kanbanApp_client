@@ -22,7 +22,8 @@
         @close="closeDialog">
         <KbnEditUserForm
           :onaction="updateUser"
-          :data="userInfo">
+          :name.sync="name"
+          :email.sync="email">
           <template slot="actionName">編集</template>
           <template slot="actionProgress">
             編集中...
@@ -48,7 +49,8 @@ export default {
   data () {
     return {
       dialogFormVisible: false,
-      userInfo: null
+      name: '',
+      email: ''
     }
   },
 
@@ -78,7 +80,9 @@ export default {
       } else if (command === 'editUser') {
         this.$store.dispatch('getUser')
           .then((data) => {
-          this.data = data
+            console.log(data)
+            this.name = data.name
+            this.email = data.email
         })
         .catch(err => this.throwReject(err))
         this.dialogFormVisible = true

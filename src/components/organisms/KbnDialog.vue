@@ -1,10 +1,12 @@
 <template>
-  <el-dialog
-    :title="title"
-    :visible="dialogFormVisible"
-    @close="$emit('close')">
-    <slot></slot>
-  </el-dialog>
+  <div class="dialog-style">
+    <el-dialog
+      :title="title"
+      :visible="dialogFormVisible"
+      @close="$emit('close')">
+      <slot></slot>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -27,5 +29,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .dialog-style {
+    text-align: left;
+  }
 </style>
