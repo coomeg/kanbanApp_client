@@ -1,5 +1,9 @@
 import * as types from './mutation-types'
 import { Auth, List, Task, Users } from '../api'
+ const devapi = 'http://localhost:8080/api'
+ const prodapi =  'http://production.com/api'
+
+export const api_url = process.env.NODE_ENV === 'production'? prodapi : devapi
 
 export default {
   login: ({ commit }, authInfo) => {
@@ -11,20 +15,32 @@ export default {
       .catch(err => { throw err })
   },
 
+  getUser: ({ commit }) => {
+    return Users.getUser()
+      .then((data) => {
+        return {
+          token: data.token,
+          userId: data.userId,
+          name: data.name,
+          email: data.email }
+      })
+      .catch(err => { throw err })
+  },
+
   createUser: ({ commit }, userInfo) => {
     return Users.create(userInfo)
       .then(({ token, userId }) => {
         localStorage.setItem('token', token)
-        commit(types.AUTH_LOGIN, { token, userId })
+        commit(types.AUTH_LOGIN, { token, userId, name })
       })
       .catch(err => { throw err })
   },
 
   editUser: ({ commit }, userInfo) => {
     return Users.update(userInfo)
-      .then(({ token, userId }) => {
-        localStorage.setItem('token', token)
-        commit(types.AUTH_LOGIN, { token, userId })
+      .then((data) => {
+        localStorage.setItem('token', data.token)
+        commit(types.AUTH_LOGIN, { token:data.token, userId: data.userId, name: data.name })
       })
       .catch(err => { throw err })
   },

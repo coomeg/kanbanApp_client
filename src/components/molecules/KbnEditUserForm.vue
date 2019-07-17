@@ -1,44 +1,56 @@
 <template>
   <form>
     <div class="form-item">
-      <label for="name">名前</label>
-      <input
-        id="name"
-        v-model="name"
-        type="text"
-        autocomplete="off"
-        placeholder="例: 山田 太郎"
-        @focus="resetError">
-      <ul class="validation-errors">
-        <li v-if="!validation.name.required">名前が入力されていません。</li>
-      </ul>
+      <div class="label-item">
+        <label for="name">名前</label>
+      </div>
+      <div class="input-item">
+        <input
+          id="name"
+          v-model="userName"
+          type="text"
+          autocomplete="off"
+          placeholder="例: 山田 太郎"
+          @focus="resetError">
+        <ul class="validation-errors">
+          <li v-if="!validation.name.required">名前が入力されていません。</li>
+        </ul>
+      </div>
     </div>
     <div class="form-item">
-      <label for="email">メールアドレス</label>
-      <input
-        id="email"
-        v-model="email"
-        type="text"
-        autocomplete="off"
-        placeholder="例: kanban@domain.com"
-        @focus="resetError">
-      <ul class="validation-errors">
-        <li v-if="!validation.email.format">メールアドレスの形式が不正です。</li>
-        <li v-if="!validation.email.required">メールアドレスが入力されていません。</li>
-      </ul>
+      <div class="label-item">
+        <label for="email">メールアドレス</label>
+      </div>
+      <div class="input-item">
+        <input
+          id="email"
+          v-model="userEmail"
+          type="text"
+          autocomplete="off"
+          placeholder="例: kanban@domain.com"
+          @focus="resetError">
+        <ul class="validation-errors">
+          <li v-if="!validation.email.format">メールアドレスの形式が不正です。</li>
+          <li v-if="!validation.email.required">メールアドレスが入力されていません。</li>
+        </ul>
+      </div>
     </div>
     <div class="form-item">
-      <label for="passowrd">パスワード</label>
-      <input
-        id="password"
-        v-model="password"
-        type="password"
-        autocomplete="off"
-        placeholder="例: xxxxxxxx"
-        @focus="resetError">
-      <ul class="validation-errors">
-        <li v-if="!validation.password.required">パスワードが入力されていません。</li>
-      </ul>
+      <div class="label-item">
+        <label for="passowrd">パスワード</label>
+      </div>
+      <div class="input-item">
+        <input
+          id="password"
+          v-model="password"
+          type="password"
+          autocomplete="off"
+          placeholder="例: xxxxxxxx"
+          @focus="resetError">
+        <ul class="validation-errors">
+          <li v-if="!validation.password.required">パスワードが入力されていません。</li>
+        </ul>
+      </div>
     </div>
     <div class="form-actions">
       <KbnButton
@@ -81,13 +93,19 @@ export default {
     onaction: {
       type: Function,
       required: true
+    },
+
+    name: {
+      type: String
+    },
+
+    email: {
+      type: String
     }
   },
 
   data () {
     return {
-      name: '',
-      email: '',
       password: '',
       progress: false,
       error: ''
@@ -95,16 +113,34 @@ export default {
   },
 
   computed: {
+    userName: {
+      get () {
+        return this.name
+      },
 
+      set (value) {
+        this.$emit('update:name', value)
+      }
+    },
+
+    userEmail: {
+      get () {
+        return this.email
+      },
+
+      set (value) {
+        this.$emit('update:email', value)
+      }
+    },
 
     validation () { // nameとemailとpasswordのバリデーション
       return {
         name: {
-          required: required(this.name)
+          required: required(this.userName)
         },
         email: {
-          required: required(this.email),
-          format: REGEX_EMAIL.test(this.email)
+          required: required(this.userEmail),
+          format: REGEX_EMAIL.test(this.userEmail)
         },
         password: {
           required: required(this.password)
@@ -140,7 +176,7 @@ export default {
       this.error = ''
 
       this.$nextTick(() => {
-        this.onaction({ userId: this.$store.state.auth.userId, name: this.name, email: this.email, password: this.password })
+        this.onaction({ userId: this.$store.state.auth.userId, name: this.userName, email: this.userEmail, password: this.password })
           .catch(err => {
             this.error = err.message
           })
@@ -159,18 +195,13 @@ form {
   margin: 0 auto;
   text-align: left;
 }
-label {
-  display: block;
-}
 input {
-  width: 100%;
   padding: .5em;
   font: inherit;
 }
 ul {
   list-style-type: none;
   padding: 0;
-  margin: 0.25em 0;
 }
 ul li {
   font-size: 0.5em;
@@ -181,4 +212,15 @@ ul li {
 .form-actions p {
   font-size: 0.5em;
 }
+/* .form-item {
+  display: -webkit-flex;
+  display: flex;
+  line-height: 0px;
+}
+.label-item {
+  width: 150px;
+} */
+/* label {
+  display: block;
+} */
 </style>

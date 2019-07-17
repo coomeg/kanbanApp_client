@@ -1,7 +1,11 @@
 <template>
   <div class="login-view">
     <h1>Kanban 新規登録</h1>
-    <KbnEditUserForm :onaction="handleCreate"/>
+    <KbnEditUserForm
+      :onaction="handleCreate"
+      :name.sync="name"
+      :email.sync="email"
+      />
   </div>
 </template>
 
@@ -10,6 +14,14 @@ import KbnEditUserForm from '@/components/molecules/KbnEditUserForm.vue'
 
 export default {
   name: 'KbnCreateUserView',
+
+  data () {
+    return {
+      name: '',
+      email: '',
+      password:''
+    }
+  },
 
   components: {
     KbnEditUserForm

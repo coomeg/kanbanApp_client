@@ -3,15 +3,26 @@ import KbnLoginView from '@/components/templates/KbnLoginView.vue'
 import KbnTaskDetailModal from '@/components/templates/KbnTaskDetailModal.vue'
 import KbnCreateUserView from '@/components/templates/KbnCreateUserView.vue'
 import KbnEditUserView from '@/components/templates/KbnEditUserView.vue'
+import KbnSideMenu from '@/components/molecules/KbnSideMenu.vue'
+import KbnHomeView from '@/components/templates/KbnHomeView.vue'
+
 
 export default [{
   path: '/',
-  component: KbnBoardView,
+  component: KbnHomeView,
   meta: { requiresAuth: true },
   children: [{
+    path: '',
+    component: KbnBoardView,
+    meta: { requiresAuth: true }
+  }, {
     path: 'tasks/:id',
     component: KbnTaskDetailModal,
     name: 'taskDetailModal',
+    meta: { requiresAuth: true }
+  }, {
+    path: 'editUser',
+    component: KbnEditUserView,
     meta: { requiresAuth: true }
   }]
 }, {
@@ -20,9 +31,6 @@ export default [{
 }, {
   path: '/createUser',
   component: KbnCreateUserView
-}, {
-  path: '/editUser',
-  component: KbnEditUserView
 }, {
   path: '*',
   redirect: '/'
