@@ -5,9 +5,9 @@
         <el-submenu index="1">
           <template slot="title"><i class="el-icon-menu"></i>メニュー</template>
             <el-menu-item index="1-1" @click="$router.push({ path: '/' })">ボード</el-menu-item>
-            <el-menu-item index="1-2">タスク</el-menu-item>
+            <el-menu-item index="1-2" @click="$router.push({ path: 'setting' })">タスク</el-menu-item>
             <el-menu-item index="1-3">チーム</el-menu-item>
-            <el-menu-item index="1-4">設定</el-menu-item>
+            <el-menu-item index="1-4" @click="$router.push({ path: 'setting' })">設定</el-menu-item>
         </el-submenu>
       </el-menu>
     </el-aside>

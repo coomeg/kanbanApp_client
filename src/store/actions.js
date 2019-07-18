@@ -53,6 +53,22 @@ export default {
       .catch(err => { throw err })
   },
 
+  fetchTaskLists: ({ commit }) => {
+    return List.getTaskListAll()
+      .then((res) => {
+        return res.data
+      })
+      .catch(err => { throw err })
+  },
+
+  updateTaskLists: ({ commit }, data) => {
+    return List.updateTaskLists(data)
+      .then((res) => {
+        return res
+      })
+      .catch(err => { throw err })
+  },
+
   addTask: ({ commit, state }, { listId, name }) => {
     return Task.add(state.auth.token, { listId, name })
       .then((task) => {

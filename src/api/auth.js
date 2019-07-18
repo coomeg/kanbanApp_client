@@ -1,11 +1,12 @@
 import client from './client'
+import * as api from '../store/actions'
 
 export default {
   login: authInfo => {
     console.log('loginする')
     return new Promise((resolve, reject) => {
       console.log('login処理')
-      client.post('http://localhost:8080/api/login', authInfo)
+      client.post(`${api.api_url}/login`, authInfo)
         .then(res => {
           console.log(res)
           resolve({ token: res.data.token, userId: res.data.userId, name: res.data.name })
@@ -18,7 +19,7 @@ export default {
 
   logout: token => {
     return new Promise((resolve, reject) => {
-      client.delete('/auth/logout', { headers: { 'x-kbn-token': token } })
+      client.post(`${api.api_url}/logout`, { headers: { 'x-kbn-token': token } })
         .then(() => resolve())
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))
