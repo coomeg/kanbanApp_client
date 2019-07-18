@@ -5,7 +5,7 @@ import KbnCreateUserView from '@/components/templates/KbnCreateUserView.vue'
 import KbnEditUserView from '@/components/templates/KbnEditUserView.vue'
 import KbnSideMenu from '@/components/molecules/KbnSideMenu.vue'
 import KbnHomeView from '@/components/templates/KbnHomeView.vue'
-
+import KbnSettingForm from '@/components/molecules/KbnSettingForm.vue'
 
 export default [{
   path: '/',
@@ -21,8 +21,8 @@ export default [{
     name: 'taskDetailModal',
     meta: { requiresAuth: true }
   }, {
-    path: 'editUser',
-    component: KbnEditUserView,
+    path: 'setting',
+    component: KbnSettingForm,
     meta: { requiresAuth: true }
   }]
 }, {
