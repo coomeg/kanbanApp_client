@@ -6,6 +6,7 @@ import KbnEditUserView from '@/components/templates/KbnEditUserView.vue'
 import KbnSideMenu from '@/components/molecules/KbnSideMenu.vue'
 import KbnHomeView from '@/components/templates/KbnHomeView.vue'
 import KbnSettingForm from '@/components/molecules/KbnSettingForm.vue'
+import KbnTaskSearchView from '@/components/templates/KbnTaskSearchView.vue'
 
 export default [{
   path: '/',
@@ -19,6 +20,10 @@ export default [{
     path: 'tasks/:id',
     component: KbnTaskDetailModal,
     name: 'taskDetailModal',
+    meta: { requiresAuth: true }
+  }, {
+    path: 'search',
+    component: KbnTaskSearchView,
     meta: { requiresAuth: true }
   }, {
     path: 'setting',

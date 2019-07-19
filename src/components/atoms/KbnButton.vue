@@ -2,7 +2,8 @@
   <el-button
     :class="classes"
     :disabled="disabled"
-    type="button"
+    :type="buttonstyle"
+    :icon="iconType"
     @click="handleClick"
   >
     <slot />
@@ -18,9 +19,20 @@ export default {
       type: String,
       default: 'button'
     },
+
     disabled: {
       type: Boolean,
       default: false
+    },
+
+    buttonstyle: {
+      type: String,
+      default: ''
+    },
+
+    iconType: {
+      type: String,
+      default: ''
     }
   },
 

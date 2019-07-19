@@ -34,8 +34,7 @@ export default {
 
   props: {
     pageName: {
-      type: String,
-      required: true
+      type: String
     }
   },
 

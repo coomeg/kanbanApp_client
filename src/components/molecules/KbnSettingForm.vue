@@ -17,6 +17,7 @@
     <div class="form-actions">
       <KbnButton
         :disabled="disableAction"
+        :type="style"
         @click="handleClick"
       >
         更新
@@ -53,7 +54,8 @@ export default {
     return {
       progress: false,
       message: '',
-      list: Array
+      list: Array,
+      style: 'primary'
     }
   },
 
