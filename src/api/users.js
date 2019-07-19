@@ -17,6 +17,20 @@ export default {
     })
   },
 
+  getUserLike: (name) => {
+    console.log('ユーザ名検索', name)
+    return new Promise((resolve, reject) => {
+      client.post(`${api.api_url}/getUserLike`, {name: name})
+        .then(res => {
+          console.log("data:", res)
+          resolve(res.data)
+        })
+        .catch(err => {
+          reject(new Error(err.response.data.message || err.message))
+        })
+    })
+  },
+
   create: userInfo => {
     console.log('ユーザ登録')
     return new Promise((resolve, reject) => {

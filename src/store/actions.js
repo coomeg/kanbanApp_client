@@ -27,6 +27,16 @@ export default {
       .catch(err => { throw err })
   },
 
+  getUserLike: ({ commit }, name) => {
+    return Users.getUserLike(name)
+      .then((data) => {
+        return data.map(param => {
+          return {value: param.name, key: param.userId}
+        })
+      })
+      .catch(err => { throw err })
+  },
+
   createUser: ({ commit }, userInfo) => {
     return Users.create(userInfo)
       .then(({ token, userId }) => {
@@ -57,6 +67,14 @@ export default {
     return List.getTaskListAll()
       .then((res) => {
         return res.data
+      })
+      .catch(err => { throw err })
+  },
+
+  searchTasks: ({ commit }, form) => {
+    return List.searchTasks(form)
+      .then((data) => {
+        return data
       })
       .catch(err => { throw err })
   },
