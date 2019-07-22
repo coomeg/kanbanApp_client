@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import actions from './actions'
 import getters from './getters'
 import mutations from './mutations'
+import createPersistedState from "vuex-persistedstate"; // StateをsessionStrageに保存する
 
 Vue.use(Vuex)
 
@@ -30,5 +31,6 @@ export default new Vuex.Store({
   getters,
   actions,
   mutations,
-  strict: process.env.NODE_ENV !== 'production'
+  strict: process.env.NODE_ENV !== 'production',
+  plugins: [createPersistedState({storage: window.sessionStorage})] // 保存先をsessionStorageに変更する
 })
