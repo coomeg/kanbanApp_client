@@ -21,7 +21,7 @@
         :disabled="progress"
         @click="handleCancel"
       >
-        キャンセル
+        <span style="font-size:10px;">キャンセル</span>
       </KbnButton>
     </div>
     <div class="messages">

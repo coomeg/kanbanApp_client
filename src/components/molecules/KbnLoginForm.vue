@@ -29,6 +29,7 @@
     </div>
     <div class="form-actions">
       <KbnButton
+        buttonstyle="primary"
         :disabled="disableLoginAction"
         @click="handleClick"
       >
@@ -47,8 +48,9 @@
         {{ error }}
       </p>
       <router-link
+        style="color:blue; text-decoration: none;"
         to="/createUser">
-        <h3 id="create-link">新規登録</h3>
+        <span id="create-link">新規登録</span>
       </router-link>
     </div>
   </form>
@@ -188,6 +190,6 @@ ul li {
   font-size: 0.5em;
 }
 .create-link {
-  color: blue;
+  color: mediumturquoise;
 }
 </style>

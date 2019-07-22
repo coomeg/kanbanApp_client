@@ -14,6 +14,7 @@ export default [{
   meta: { requiresAuth: true },
   children: [{
     path: '',
+    name: 'Kanban App',
     component: KbnBoardView,
     meta: { requiresAuth: true }
   }, {
@@ -23,10 +24,12 @@ export default [{
     meta: { requiresAuth: true }
   }, {
     path: 'search',
+    name: 'タスク検索',
     component: KbnTaskSearchView,
     meta: { requiresAuth: true }
   }, {
     path: 'setting',
+    name: '設定',
     component: KbnSettingForm,
     meta: { requiresAuth: true }
   }]

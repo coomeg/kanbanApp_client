@@ -1,6 +1,7 @@
 <template>
   <span :class="classes">
-    {{ icon }}
+    <i style="font-size:20px;" v-show="name === 'add'" class="el-icon-circle-plus-outline"></i>
+    <i style="font-size:20px;" v-show="name === 'close' || name === 'remove'" class="el-icon-error"></i>
   </span>
 </template>
 

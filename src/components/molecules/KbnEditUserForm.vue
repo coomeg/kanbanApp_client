@@ -54,6 +54,7 @@
     </div>
     <div class="form-actions">
       <KbnButton
+        buttonstyle="primary"
         :disabled="disableCreateAction"
         @click="handleClick"
       >
@@ -71,6 +72,11 @@
       >
         {{ error }}
       </p>
+      <KbnButton
+        @click="back"
+      >
+        戻る
+      </KbnButton>
     </div>
   </form>
 </template>
@@ -91,6 +97,11 @@ export default {
 
   props: {
     onaction: {
+      type: Function,
+      required: true
+    },
+
+    back: {
       type: Function,
       required: true
     },

@@ -4,6 +4,6 @@ export default {
     state.board.lists.forEach(list => {
       tasks.push(...list.items)
     })
-    return tasks.find(task => task.id === id)
+    return tasks.find(task => task.taskId === id)
   }
 }

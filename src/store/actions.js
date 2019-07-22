@@ -57,8 +57,9 @@ export default {
 
   fetchLists: ({ commit, state }) => {
     return List.fetch(state.auth.token)
-      .then(({ lists }) => {
-        commit(types.FETCH_ALL_TASKLIST, lists)
+      .then((res) => {
+        console.log(res)
+        commit(types.FETCH_ALL_TASKLIST, res.data)
       })
       .catch(err => { throw err })
   },
@@ -96,36 +97,39 @@ export default {
   },
 
   updateTask: ({ commit, state }, task) => {
-    return Task.update(state.auth.token, task)
+    return Task.update(task)
       .then(() => {
         commit(types.UPDATE_TASK, task)
       })
       .catch(err => { throw err })
   },
 
-  removeTask: ({ commit, state }, { id, listId }) => {
-    return Task.remove(state.auth.token, { id, listId })
+  removeTask: ({ commit, state }, data) => {
+    return Task.remove(state.auth.token, data)
       .then(() => {
-        commit(types.REMOVE_TASK, { id, listId })
+        commit(types.REMOVE_TASK, data)
       })
       .catch(err => { throw err })
   },
 
-  moveTaskFrom: ({ commit, state }, { id, listId }) => {
-    commit(types.MOVE_TASK_FROM, { target: id, from: listId })
+  moveTaskFrom: ({ commit, state }, { id, listId, sortNoFrom }) => {
+    console.log('sortNoFrom::', sortNoFrom)
+    commit(types.MOVE_TASK_FROM, { target: id, from: listId, sortNoFrom: sortNoFrom })
     return Promise.resolve()
   },
 
-  moveToTask: ({ commit, state }, { id, listId }) => {
-    commit(types.MOVE_TO_TASK, { target: id, to: listId })
+  moveToTask: ({ commit, state }, { id, listId, sortNoTo }) => {
+    console.log('sortNoTo::', sortNoTo)
+    commit(types.MOVE_TO_TASK, { target: id, to: listId, sortNoTo: sortNoTo })
     return Promise.resolve()
   },
 
   performTaskMoving: ({ commit, state }) => {
-    const { target, from, to } = state.dragging
-    return Task.move(state.auth.token, { id: target, from, to })
+    const { target, from, to, sortNoFrom, sortNoTo } = state.dragging
+    console.log('state.dragging', state.dragging)
+    return Task.move(state.auth.token, { id: target, from, to, sortNoFrom, sortNoTo })
       .then(() => {
-        commit(types.MOVE_TASK_DONE, { target, from, to })
+        commit(types.MOVE_TASK_DONE, { target, from, to, sortNoFrom, sortNoTo })
       })
       .catch(err => { throw err })
   },

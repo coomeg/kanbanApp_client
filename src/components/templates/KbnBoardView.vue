@@ -58,6 +58,7 @@ export default {
         .then(() => {
           this.resetProgress()
         })
+
     },
   }
 }

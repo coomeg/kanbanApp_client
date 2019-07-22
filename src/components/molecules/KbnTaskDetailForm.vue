@@ -18,6 +18,14 @@
         v-model="task.description"
       />
     </div>
+
+    <div class="form-item">
+      <label for="task-userName">担当者</label>
+      <KbnUserSelect
+        :selectedUserId="task.userId"
+        :changeValue="funcChangeValue" />
+    </div>
+
     <div class="form-actions">
       <KbnButton
         :disabled="progress"
@@ -43,12 +51,14 @@
 
 <script>
 import KbnButton from '@/components/atoms/KbnButton.vue'
+import KbnUserSelect from '@/components/atoms/KbnUserSelect.vue'
 
 export default {
   name: 'KbnTaskDetailFrom',
 
   components: {
-    KbnButton
+    KbnButton,
+    KbnUserSelect
   },
 
   props: {
@@ -86,6 +96,10 @@ export default {
             this.progress = false
           })
       })
+    },
+
+    funcChangeValue (value) {
+      this.task.userId = value
     }
   }
 }

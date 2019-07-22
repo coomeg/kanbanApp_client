@@ -19,7 +19,9 @@ const state = {
   dragging: { // ドラッグ&ドロップされるタスクを処理するための状態を格納する
     target: null, // ドラッグ&ドロップ対象のタスクID
     from: null, // ドラッグ元のタスクリストID
-    to: null // ドロップ先のタスクリストID
+    to: null, // ドロップ先のタスクリストID
+    sortNoFrom: null, // ドラッグ元のソート順
+    sortNoTo: null // ドラッグ先のソート順
   }
 }
 

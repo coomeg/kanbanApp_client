@@ -21,7 +21,6 @@ export default {
 
   data () {
     return {
-      pageName: 'Kanban App',
       progress: false,
       message: ''
     }
@@ -30,12 +29,6 @@ export default {
   components: {
     KbnBoardMenu,
     KbnEditUserView
-  },
-
-  props: {
-    pageName: {
-      type: String
-    }
   },
 
   computed: mapState({

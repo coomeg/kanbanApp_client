@@ -46,9 +46,9 @@ export default {
           // 検索結果を初期化
           this.searchResult = []
           res.data.forEach((data, index) => {
-
+            console.log(data)
             // 日付をフォーマット
-            const d = new Date(data[0].createDate)
+            const d = new Date(data.createDate)
             const formatted = `
               ${d.getFullYear()} /
               ${d.getMonth()+1} /
@@ -57,17 +57,15 @@ export default {
 
             this.searchResult.push({
               no: ++index,
-              taskId: data[0].taskId,
-              taskName: data[0].name,
-              // createDate: data[0].createDate,
+              taskId: data.taskId,
+              taskName: data.name,
               createDate: formatted,
-              name: data[0].syain.name,
-              status: data[0].taskList.name
+              name: data.syain ? data.syain.name : '',
+              status: data.taskList.name
             })
           })
           this.loading = false
         })
-        .catch(err => this.throwReject(err))
     },
   }
 }

@@ -35,11 +35,15 @@ export default {
     KbnTaskDetailForm
   },
 
+  props: {
+    taskId: Number
+  },
+
   computed: {
     task () {
-      const id = parseInt(this.$route.params.id)
-      return !Number.isNaN(id)
-        ? {...this.$store.getters.getTaskById(id)}
+      // const id = parseInt(this.$route.params.id)
+      return !Number.isNaN(this.taskId)
+        ? {...this.$store.getters.getTaskById(this.taskId)}
         : {}
     }
   },
