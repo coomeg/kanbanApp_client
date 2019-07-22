@@ -72,6 +72,7 @@ export default {
     draggableItems: {
       get () { return this.items },
       set (value) {
+        console.log("draggableItems:setter::", value)
         // NOTE:
         //  本来なら、Vue.Draggrableから処理されたデータをitemsに反映すれば可能だが、
         //  フロントエンドとバックエンドの状態を整合とるために、ここでは何もしない。
@@ -85,21 +86,34 @@ export default {
   },
 
   methods: {
-    handleRemove ({ id, listId }) {
-      return this.$store.dispatch('removeTask', { id, listId })
+    handleRemove ({ taskId, taskListId }) {
+      return this.$store.dispatch('removeTask', { taskId, taskListId })
+        .then(() => {
+          console.log('削除')
+          this.$store.dispatch('fetchLists')
+            .catch(err => Promise.reject(err))
+            .then(() => {
+              this.resetProgress()
+            })
+        })
         .catch(err => Promise.reject(err))
     },
 
     handleChange ({ added, removed }) {
+      console.log('added:', added, 'removed:', removed)
       if (added) {
+        console.log('added:', added.newIndex, 'removed:', removed)
         return this.$store.dispatch('moveToTask', {
-          id: added.element.id,
-          listId: this.id
+          id: added.element.taskId,
+          listId: this.id,
+          sortNoTo: added.newIndex
         }).catch(err => Promise.reject(err))
       } else if (removed) {
+        console.log('added:', added, 'removed:', removed.oldIndex)
         return this.$store.dispatch('moveTaskFrom', {
-          id: removed.element.id,
-          listId: this.id
+          id: removed.element.taskId,
+          listId: this.id,
+          sortNoFrom: removed.oldIndex
         }).catch(err => Promise.reject(err))
       }
     },

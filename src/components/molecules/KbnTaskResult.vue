@@ -42,11 +42,6 @@ export default {
   },
 
   props: {
-    onaction: {
-      type: Function,
-      required: true
-    },
-
     loadingFlg: {
       type: Boolean,
       required: true
@@ -54,31 +49,6 @@ export default {
 
     tableData: Array
   },
-
-  // computed: {
-
-  // },
-
-  methods: {
-    clear () {
-      this.error = ''
-    },
-
-    handleClick (ev) {
-      this.progress = true
-      this.error = ''
-
-      this.$nextTick(() => {
-        this.onaction({ userId: this.$store.state.auth.userId, name: this.userName, email: this.userEmail, password: this.password })
-          .catch(err => {
-            this.error = err.message
-          })
-          .then(() => {
-            this.progress = false
-          })
-      })
-    }
-  }
 }
 </script>
 

@@ -2,7 +2,7 @@
   <ul class="board-tasks">
     <li
       v-for="list in lists"
-      :key="list.id"
+      :key="list.taskId"
     >
       <KbnTaskList v-bind="list" />
     </li>

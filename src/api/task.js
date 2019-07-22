@@ -1,9 +1,11 @@
 import client from './client'
+import * as api from '../store/actions'
 
 export default {
   add: (token, { name, listId }) => {
     return new Promise((resolve, reject) => {
-      client.post(`/tasks/add`, { name, listId }, { headers: { 'x-kbn-token': token } })
+      console.log(listId)
+      client.post(`${api.api_url}/createTask`, { name, taskListId: listId })
         .then(res => resolve(res.data))
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))
@@ -11,9 +13,10 @@ export default {
     })
   },
 
-  update: (token, { id, name, description, listId }) => {
+  update: (task) => {
     return new Promise((resolve, reject) => {
-      client.put(`/tasks/${id}/update`, { name, description, listId }, { headers: { 'x-kbn-token': token } })
+      console.log('Task::::', task)
+      client.put(`${api.api_url}/tasks`, task)
         .then(() => resolve())
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))
@@ -21,9 +24,9 @@ export default {
     })
   },
 
-  remove: (token, { id, listId }) => {
+  remove: (token, data) => {
     return new Promise((resolve, reject) => {
-      client.delete(`/tasks/${id}/remove`, { headers: { 'x-kbn-token': token } })
+      client.post(`${api.api_url}/deleteTasks`, data)
         .then(() => resolve())
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))
@@ -31,9 +34,10 @@ export default {
     })
   },
 
-  move: (token, { id, from, to }) => {
+  move: (token, { id, from, to, sortNoFrom, sortNoTo }) => {
+    console.log('ID:',id,'from:',from,'to',to)
     return new Promise((resolve, reject) => {
-      client.post(`/tasks/${id}/move`, { from, to }, { headers: { 'x-kbn-token': token } })
+      client.put(`${api.api_url}/taskMove`, { taskId: id, taskListIdFrom: from, taskListIdTo: to, sortNoFrom, sortNoTo})
         .then(() => resolve())
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))

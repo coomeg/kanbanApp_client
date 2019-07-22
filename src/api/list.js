@@ -4,8 +4,8 @@ import * as api from '../store/actions'
 export default {
   fetch: token => {
     return new Promise((resolve, reject) => {
-      client.get('/lists', { headers: { 'x-kbn-token': token } })
-        .then(res => resolve({ lists: res.data.lists }))
+      client.post(`${api.api_url}/bord`)
+        .then(res => resolve({ data: res.data }))
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))
         })

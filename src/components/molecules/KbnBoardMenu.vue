@@ -2,6 +2,7 @@
   <div class="flex-box">
     <div class="title">
       <span>Kanban App</span>
+      {{this.$route.params.name}}
     </div>
     <div class="setting">
       <span>{{userName}}</span>
@@ -22,6 +23,7 @@
         @close="closeDialog">
         <KbnEditUserForm
           :onaction="updateUser"
+          :back="backAction"
           :name.sync="name"
           :email.sync="email">
           <template slot="actionName">編集</template>
@@ -103,6 +105,10 @@ export default {
         .then(() => {
           this.resetProgress()
         })
+    },
+
+    backAction() {
+      this.closeDialog()
     },
 
     updateUser (authInfo) {
