@@ -47,6 +47,8 @@
       >
         {{ error }}
       </p>
+      <br />
+      <br />
       <router-link
         style="color:blue; text-decoration: none;"
         to="/createUser">
@@ -189,6 +191,11 @@ ul li {
 .form-actions p {
   font-size: 0.5em;
 }
+
+.form-actions {
+  text-align: left;
+}
+
 .create-link {
   color: mediumturquoise;
 }

@@ -209,6 +209,7 @@ form {
 input {
   padding: .5em;
   font: inherit;
+  line-height: 0px;
 }
 ul {
   list-style-type: none;
@@ -223,15 +224,4 @@ ul li {
 .form-actions p {
   font-size: 0.5em;
 }
-/* .form-item {
-  display: -webkit-flex;
-  display: flex;
-  line-height: 0px;
-}
-.label-item {
-  width: 150px;
-} */
-/* label {
-  display: block;
-} */
 </style>

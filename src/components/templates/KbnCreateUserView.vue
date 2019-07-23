@@ -1,10 +1,11 @@
 <template>
   <div class="login-view">
-    <h1>Kanban 新規登録</h1>
+    <h1>新規登録</h1>
     <KbnEditUserForm
       :onaction="handleCreate"
       :name.sync="name"
       :email.sync="email"
+      :back="backAction"
       />
   </div>
 </template>
@@ -34,6 +35,10 @@ export default {
           this.$router.push({ path: '/login' })
         })
         .catch(err => this.throwReject(err))
+    },
+
+    backAction () {
+      this.$router.push({ path: '/login' })
     },
 
     throwReject (err) { return Promise.reject(err) }

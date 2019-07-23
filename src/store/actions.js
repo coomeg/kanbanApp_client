@@ -40,8 +40,7 @@ export default {
   createUser: ({ commit }, userInfo) => {
     return Users.create(userInfo)
       .then(({ token, userId }) => {
-        localStorage.setItem('token', token)
-        commit(types.AUTH_LOGIN, { token, userId, name })
+        console.log(userId)
       })
       .catch(err => { throw err })
   },
@@ -92,6 +91,7 @@ export default {
     return Task.add(state.auth.token, { listId, name })
       .then((task) => {
         commit(types.ADD_TASK, task)
+        return task.name
       })
       .catch(err => { throw err })
   },
@@ -118,6 +118,14 @@ export default {
     return Promise.resolve()
   },
 
+  moveTask: ({ commit, state }, data) => {
+    return Task.sortTask(state.auth.token, data)
+      .then(() => {
+        commit(types.MOVE_TASK, data)
+      })
+      .catch(err => { throw err })
+  },
+
   moveToTask: ({ commit, state }, { id, listId, sortNoTo }) => {
     console.log('sortNoTo::', sortNoTo)
     commit(types.MOVE_TO_TASK, { target: id, to: listId, sortNoTo: sortNoTo })
@@ -138,6 +146,7 @@ export default {
     return Auth.logout(state.auth.token)
       .then(() => {
         localStorage.removeItem('token')
+        sessionStorage.removeItem('vuex')
         commit(types.AUTH_LOGOUT, { token: null, userId: null })
       })
       .catch(err => { throw err })

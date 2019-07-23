@@ -1,12 +1,13 @@
 <template>
   <div class="flex-box">
     <div class="title">
-      <span>Kanban App</span>
-      {{this.$route.params.name}}
+      <span>{{this.$route.name}}</span>
     </div>
     <div class="setting">
       <span>{{userName}}</span>
-      <el-dropdown  @command="handleSetting">
+      <el-dropdown
+        hide-timeout="600"
+        @command="handleSetting">
         <i class="el-icon-setting" style="margin-right: 15px"></i>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="editUser">
@@ -61,6 +62,12 @@ export default {
   }),
 
   methods: {
+    complete() {
+      this.$message({
+        message: '更新しました',
+        type: 'success'
+      });
+    },
 
     selectMenu (key, keyPath) {
       this.$emit('select-menu', key, keyPath)
@@ -116,6 +123,7 @@ export default {
       return this.$store.dispatch('editUser', authInfo)
         .then(() => {
           this.dialogFormVisible = false
+          this.complete()
         })
         .catch(err => this.throwReject(err))
     },
@@ -130,9 +138,6 @@ export default {
 </script>
 
 <style scoped>
-  .el-dropdown {
-    font-size: 20px;
-  }
 
   .flex-box{
     display:flex;

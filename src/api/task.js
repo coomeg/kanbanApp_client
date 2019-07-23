@@ -43,5 +43,15 @@ export default {
           reject(new Error(err.response.data.message || err.message))
         })
     })
+  },
+
+  sortTask: (token, { id, listId, sortNoFrom, sortNoTo }) => {
+    return new Promise((resolve, reject) => {
+      client.put(`${api.api_url}/setSortTask`, { taskId: id, taskListId: listId, sortNoFrom, sortNoTo})
+        .then(() => resolve())
+        .catch(err => {
+          reject(new Error(err.response.data.message || err.message))
+        })
+    })
   }
 }

@@ -1,6 +1,7 @@
 <template>
   <div class="dialog-style">
     <el-dialog
+      width="500px"
       :title="title"
       :visible="dialogFormVisible"
       @close="$emit('close')">
@@ -28,8 +29,18 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
   .dialog-style {
     text-align: left;
+    line-height: 20px;
   }
+
+  input {
+    width: 95%;
+  }
+
+  .form-actions {
+    text-align: right;
+  }
+
 </style>

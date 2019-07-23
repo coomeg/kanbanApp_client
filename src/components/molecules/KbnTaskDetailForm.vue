@@ -28,6 +28,7 @@
 
     <div class="form-actions">
       <KbnButton
+        buttonstyle="primary"
         :disabled="progress"
         @click="handleClick"
       >
