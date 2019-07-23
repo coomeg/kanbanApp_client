@@ -39,6 +39,12 @@ export default {
   },
 
   methods: {
+    complete(count) {
+        this.$message({
+          message: `検索結果は、${count}件です`,
+        });
+    },
+
     searchAction (form) {
       this.loading = true
       return this.$store.dispatch('searchTasks', form)
@@ -65,6 +71,7 @@ export default {
             })
           })
           this.loading = false
+          this.complete(this.searchResult.length)
         })
     },
   }

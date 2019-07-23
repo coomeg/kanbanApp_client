@@ -12,6 +12,7 @@
     </div>
     <div class="form-actions">
       <KbnButton
+        buttonstyle="primary"
         :disabled="disableAddAction"
         @click="handleAdd"
       >
@@ -73,13 +74,20 @@ export default {
   },
 
   methods: {
+    complete(name) {
+      this.$message({
+        message: `${name}を追加しました`,
+        type: 'success'
+      });
+    },
     handleAdd () {
       this.progress = true
       this.error = ''
 
       const { name, listId } = this
       return this.$store.dispatch('addTask', { name, listId })
-        .then(() => {
+        .then((name) => {
+          this.complete(name)
           this.$emit('close')
         })
         .catch(err => {

@@ -1,35 +1,40 @@
 <template>
-  <div>
+  <div class="form-style">
     <div class="form-item">
-      <div class="label-item">
+      <div class="lavel-style">
         <label for="name">担当者</label>
       </div>
       <el-autocomplete
+        class="input-style"
         v-model="name"
         :fetch-suggestions="querySearchAsync"
-        placeholder="Please input"
+        placeholder="例: 山田 太郎"
         @select="handleSelect"
       ></el-autocomplete>
     </div>
-
-    <div class="block">
-      <span class="demonstration">作成日</span>
+    <div class="form-item">
+      <div class="lavel-style">
+        <span>作成日</span>
+      </div>
       <el-date-picker
+        class="input-style"
         v-model="createDate"
         type="daterange"
         range-separator="～"
-        start-placeholder="Start date"
-        end-placeholder="End date">
+        start-placeholder="例: 2019-01-01"
+        end-placeholder="例: 2019-01-03">
       </el-date-picker>
     </div>
 
     <div class="form-item">
-      <div class="label-item">
-        <label for="name">キーワード</label>
+      <div class="lavel-style">
+        <label for="keyword">キーワード</label>
       </div>
-      <div class="input-item">
-        <el-input placeholder="Please input" v-model="keyword"></el-input>
-      </div>
+      <el-input
+        class="input-style"
+        placeholder="例: タスク"
+        v-model="keyword">
+      </el-input>
     </div>
 
     <div class="form-item">
@@ -215,8 +220,8 @@ export default {
 </script>
 
 <style scoped>
-form {
-  display: block;
+.form-style {
+  display: inline;
   margin: 0 auto;
   text-align: left;
 }
@@ -237,15 +242,12 @@ ul li {
 .form-actions p {
   font-size: 0.5em;
 }
-/* .form-item {
-  display: -webkit-flex;
-  display: flex;
-  line-height: 0px;
+
+.form-item {
+  padding: 10px 0px 10px 0px;
 }
-.label-item {
-  width: 150px;
-} */
-/* label {
-  display: block;
-} */
+
+.input-style {
+  width: 300px;
+}
 </style>

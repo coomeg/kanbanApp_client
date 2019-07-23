@@ -61,13 +61,30 @@ export default {
   },
 
   [types.REMOVE_TASK] (state, payload) {
+    const { target, from, sortNoFrom, sortNoTo } = payload
+    state.dragging.target = target
+    state.dragging.from = from
+    state.dragging.sortNoFrom = sortNoFrom
+    state.dragging.sortNoTo = sortNoTo
+  },
+
+  [types.MOVE_TASK] (state, payload) {
+    const getTaskList = (lists, id) => lists.find(list => list.id === id)
+
+    // ドラッグ&ドロップ処理のための状態をリセット
+    state.dragging.target = null
+    state.dragging.from = null
+    state.dragging.to = null
+
+    // 移動元のタスクリストからタスクを削除
+    const taskList = getTaskList(state.board.lists, payload.listId)
     console.log('payload:::',payload)
-    const { id, listId } = payload
-    for (let i = 0; i < state.board.lists.length; i++) {
-      const list = state.board.lists[i]
-      if (list.id !== listId) { continue }
-      list.items = list.items.filter(item => item.id !== id)
-    }
+    console.log('state.board.lists:::',state.board.lists)
+    const task = taskList.items[payload.sortNoFrom]
+    taskList.items.splice(payload.sortNoFrom, 1)
+
+    // 移動先のソート順に要素を追加
+    taskList.items.splice(payload.sortNoTo, 0, task)
   },
 
   [types.AUTH_LOGOUT] (state, payload) {

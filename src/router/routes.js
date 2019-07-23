@@ -14,7 +14,7 @@ export default [{
   meta: { requiresAuth: true },
   children: [{
     path: '',
-    name: 'Kanban App',
+    name: 'ボード',
     component: KbnBoardView,
     meta: { requiresAuth: true }
   }, {

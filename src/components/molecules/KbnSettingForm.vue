@@ -2,7 +2,7 @@
   <form novalidate>
     <div class="form-item">
       <div v-for="(item, index) in list" v-bind:key="item.taskListId">
-        <label for="taskListName1">タスクリスト名{{++index}}（ステータス）</label>
+        <label for="taskListName1">タスクリスト名{{++index}}</label>
         <input
           v-model="item.name"
           type="text"
@@ -10,12 +10,13 @@
           placeholder="例: タスク"
           @focus="resetError">
         <ul class="validation-errors">
-          <li v-if="!validation.taskListName1.required">タスクリスト名{{index}}（ステータス）が入力されていません。</li>
+          <li v-if="!validation.taskListName1.required">タスクリスト名{{index}}が入力されていません。</li>
         </ul>
       </div>
     </div>
     <div class="form-actions">
       <KbnButton
+        buttonstyle="primary"
         :disabled="disableAction"
         :type="style"
         @click="handleClick"
@@ -97,6 +98,13 @@ export default {
   },
 
   methods: {
+    complete() {
+        this.$message({
+          message: '更新しました',
+          type: 'success'
+        });
+    },
+
     resetError () {
       this.error = ''
     },
@@ -110,6 +118,8 @@ export default {
       return this.$store.dispatch('updateTaskLists', this.list)
         .then((res) => {
           console.log(res)
+          this.resetProgress()
+          this.complete()
         })
         .catch(err => this.throwReject(err))
     },
@@ -149,7 +159,7 @@ export default {
     display: block;
   }
   input {
-    width: 100%;
+    width: 98%;
     padding: .5em;
     font: inherit;
   }
@@ -164,6 +174,11 @@ export default {
   .validation-errors {
     height: 32px;
   }
+
+  .form-actions {
+    padding: 0px 10px 0px 0px;
+  }
+
   .form-actions p {
     font-size: 0.5em;
   }

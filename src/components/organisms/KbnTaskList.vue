@@ -86,20 +86,27 @@ export default {
   },
 
   methods: {
+    complete(name) {
+      this.$message({
+        message: `${name}を削除しました`,
+        type: 'success'
+      });
+    },
     handleRemove ({ taskId, taskListId }) {
+      const removeTask = this.$store.getters.getTaskById(taskId)
       return this.$store.dispatch('removeTask', { taskId, taskListId })
         .then(() => {
           console.log('削除')
           this.$store.dispatch('fetchLists')
             .catch(err => Promise.reject(err))
             .then(() => {
-              this.resetProgress()
+              this.complete(removeTask.name)
             })
         })
         .catch(err => Promise.reject(err))
     },
 
-    handleChange ({ added, removed }) {
+    handleChange ({ added, removed, moved }) {
       console.log('added:', added, 'removed:', removed)
       if (added) {
         console.log('added:', added.newIndex, 'removed:', removed)
@@ -115,11 +122,22 @@ export default {
           listId: this.id,
           sortNoFrom: removed.oldIndex
         }).catch(err => Promise.reject(err))
+      } else if (moved) {
+        // 同じタスクリスト内の移動
+        // 順番の変更のみの場合
+        console.log('moved:', moved)
+        return this.$store.dispatch('moveTask', {
+          id: moved.element.taskId,
+          listId: this.id,
+          sortNoFrom: moved.oldIndex,
+          sortNoTo: moved.newIndex
+        }).catch(err => Promise.reject(err))
       }
     },
 
     handleEnd () {
       if (this.canMove) {
+        console.log('handleEnd')
         return this.$store.dispatch('performTaskMoving')
           .catch(err => Promise.reject(err))
       }

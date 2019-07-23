@@ -80,6 +80,12 @@ export default {
   },
 
   methods: {
+    complete() {
+      this.$message({
+        message: '更新しました',
+        type: 'success'
+      });
+    },
     closeDialog () {
       this.dialogFormVisible = false
     },
@@ -92,7 +98,8 @@ export default {
       console.log('task::::',task)
       return this.$store.dispatch('updateTask', task)
         .then(() => {
-           this.closeDialog()
+          this.closeDialog()
+          this.complete()
         })
     },
 
