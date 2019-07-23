@@ -1,0 +1,73 @@
+POST http://localhost:8080/api/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "ao.kcghiro@gmail.com",
+    "password": "123"
+}
+
+###
+POST http://localhost:8080/api/logout HTTP/1.1
+content-type: application/json
+
+{
+    "email": "aokcghiro@gmail.com",
+    "password": "123"
+}
+
+###
+POST http://localhost:8080/api/getUser HTTP/1.1
+
+### 全タスク取得
+POST http://localhost:8080/api/getTask HTTP/1.1
+
+### タスクリスト取得
+POST http://localhost:8080/api/getTaskListAll HTTP/1.1
+
+### タスクリスト更新
+PUT http://localhost:8080/api/taskLists HTTP/1.1
+content-type: application/json
+
+[{
+    "taskListId": "1",
+    "name": "テスト１"
+},
+{
+    "taskListId": "2",
+    "name": "テスト２"
+}
+]
+
+### ユーザーライク検索
+POST http://localhost:8080/api/getUserLike HTTP/1.1
+content-type: application/json
+
+{
+    "taskListId": "1",
+    "name": "青"
+}
+
+### タスク検索
+POST http://localhost:8080/api/searchTasks HTTP/1.1
+content-type: application/json
+
+{
+    "sname": "",
+    "dateFrom": "1900-01-01",
+    "dateTo": "9999-12-31",
+    "keyword": "",
+    "taskListIds": [1,2,3]
+}
+
+### タスク更新
+PUT  http://localhost:8080/api/tasks HTTP/1.1
+content-type: application/json
+
+{
+    "name": "追加したタスク",
+    "description": "説明1",
+    "userId": "1"
+}
+
+### ボード初期表示
+POST http://localhost:8080/api/bord HTTP/1.1
