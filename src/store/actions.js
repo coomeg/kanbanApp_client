@@ -1,7 +1,7 @@
 import * as types from './mutation-types'
 import { Auth, List, Task, Users } from '../api'
  const devapi = 'http://localhost:8080/api'
- const prodapi =  'http://production.com/api'
+ const prodapi =  'http://133.167.111.253:8080/api'
 
 export const api_url = process.env.NODE_ENV === 'production'? prodapi : devapi
 

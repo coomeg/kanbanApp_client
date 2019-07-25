@@ -71,3 +71,12 @@ content-type: application/json
 
 ### ボード初期表示
 POST http://localhost:8080/api/bord HTTP/1.1
+
+###
+POST http://pg-memo.net/api/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "ao.kcghiro@gmail.com",
+    "password": "123"
+}
