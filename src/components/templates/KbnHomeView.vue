@@ -1,6 +1,7 @@
 <template>
   <el-container class="home">
-    <KbnSideMenu />
+    <!-- <KbnSideMenu />
+    -->
     <KbnBoardNavigation />
   </el-container>
 </template>

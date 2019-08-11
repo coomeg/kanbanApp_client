@@ -12,6 +12,6 @@ export default {
 
 <style>
 #app {
-  height: 900px;
+  height: 100%;
 }
 </style>

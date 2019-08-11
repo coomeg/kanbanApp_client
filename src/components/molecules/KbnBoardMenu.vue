@@ -10,9 +10,22 @@
         @command="handleSetting">
         <i class="el-icon-setting" style="margin-right: 15px"></i>
         <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="board">
+            ボード
+          </el-dropdown-item>
+
+          <el-dropdown-item command="search">
+            タスク
+          </el-dropdown-item>
+
+          <el-dropdown-item command="setting">
+            設定
+          </el-dropdown-item>
+
           <el-dropdown-item command="editUser">
             ユーザー情報変更
           </el-dropdown-item>
+
           <el-dropdown-item command="logout">
             ログオフ
           </el-dropdown-item>
@@ -97,6 +110,12 @@ export default {
         this.dialogFormVisible = true
       } else if (command === 'logout') {
         this.handleLogout()
+      } else if (command === 'board') {
+        this.$router.push({ path: '/' })
+      } else if (command === 'search') {
+        this.$router.push({ path: 'search' })
+      } else if (command === 'setting') {
+        this.$router.push({ path: 'setting' })
       }
     },
 
