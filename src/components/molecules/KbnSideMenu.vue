@@ -1,6 +1,6 @@
 <template>
   <el-container class="sidber">
-    <el-aside width="260px">
+    <el-aside width="0%">
       <el-menu :default-openeds="['1']">
         <el-submenu index="1">
           <template slot="title"><i class="el-icon-menu"></i>メニュー</template>
@@ -32,7 +32,7 @@ export default {
 <style>
  .el-container {
     border: 1px solid #eee;
-    width: 300px;
+    width: 0%;
   }
 
   .el-aside {
