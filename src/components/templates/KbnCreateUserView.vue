@@ -1,6 +1,6 @@
 <template>
   <div class="login-view">
-    <h1>新規登録</h1>
+    <h1>新規登録　てすと</h1>
     <KbnEditUserForm
       :onaction="handleCreate"
       :name.sync="name"
