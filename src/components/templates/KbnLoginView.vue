@@ -1,6 +1,6 @@
 <template>
   <div class="login-view">
-    <h1>Kanban App rebaseテスト</h1>
+    <h1>Kanban App rebaseテストこみっと履歴をつくる</h1>
     <KbnLoginForm
       :onlogin="handleLogin"
       :oncreate="handlecreate"/>
