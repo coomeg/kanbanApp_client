@@ -11,7 +11,7 @@
         <i class="el-icon-setting" style="margin-right: 15px"></i>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="editUser">
-            ユーザー情報編集
+            ユーザー情報編集 テスト
           </el-dropdown-item>
           <el-dropdown-item command="logout">
             ログオフ
